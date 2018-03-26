@@ -1,17 +1,17 @@
-require 'test_helper'
+require 'rails_helper'
 
-class UserTest < ActiveSupport::TestCase
+describe User do
   def setup
     @user = User.new(name: "usr", full_name: "Example User")
   end
   
   # name validation tests
-  test "name should be present (nonblank)" do
+  it "name should be present (nonblank)" do
     @user.name = " " * 6
     assert_not @user.valid?
   end
 
-  test "name should have a minimum length" do
+  it "name should have a minimum length" do
     @user.name = "a" * 2
     assert_not @user.valid?
   end
