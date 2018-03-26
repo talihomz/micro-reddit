@@ -1,35 +1,36 @@
-require 'rails_helper'
+require_relative '../rails_helper'
 
 describe User do
-  def setup
-    @user = User.new(name: "usr", full_name: "Example User")
-  end
+  subject { User.new(name: "usr", full_name: "Example User") }
   
-  # name validation tests
-  it "name should be present (nonblank)" do
-    @user.name = " " * 6
-    assert_not @user.valid?
-  end
+  describe "#name" do 
+    it "is invalid when blank" do
+      subject.name = " " * 6
+      expect(subject).to_not be_valid
+    end
 
-  it "name should have a minimum length" do
-    @user.name = "a" * 2
-    assert_not @user.valid?
-  end
+    it "is invalid when shorter than 3 characters" do
+      subject.name = "a" * 2
+      expect(subject).to_not be_valid
+    end
 
-  test "name should have a maximum length" do
-    @user.name = "a" * 51
-    assert_not @user.valid?
+    it "is invalid when longer than 50 characters" do
+      subject.name = "a" * 51
+      expect(subject).to_not be_valid
+    end
   end
+    
 
-  # full name validation tests
-  test "full name should be present (nonblank)" do
-    @user.full_name = " " * 6
-    assert_not @user.valid?
-  end
+  describe "#full_name" do
+    it "is invalid when blank" do
+      subject.full_name = " " * 6
+      expect(subject).to_not be_valid
+    end
 
-  test "full_name should have a maximum length" do
-    @user.full_name = "a" * 101
-    assert_not @user.valid?
+    it "is invalid when longer than 100 characters" do
+      subject.full_name = "a" * 101
+      expect(subject).to_not be_valid
+    end
   end
 
 end
