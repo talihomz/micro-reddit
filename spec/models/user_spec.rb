@@ -1,4 +1,4 @@
-require_relative '../rails_helper'
+require 'rails_helper'
 
 describe User, type: :model do
   subject { User.new(name: 'usr', full_name: 'Example User') }
