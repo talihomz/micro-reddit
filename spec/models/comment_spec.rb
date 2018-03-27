@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe Comment, type: :model do
   fixtures :comments
-  subject { Comment.new(content: "I'm a comment :)") }
+  subject { comments(:one) }
   
   describe "Validations" do
 
     describe '#content' do
       it 'is invalid when blank' do
-        subject.content = ' ' * 10
+        subject.content = ' ' * 10  # subject.content = '          '
         expect(subject).to_not be_valid
       end
 
