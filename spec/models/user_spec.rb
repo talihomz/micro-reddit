@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  subject { User.new(name: 'usr', full_name: 'Example User') }
+  fixtures :users
+  subject { User.new }
 
   describe 'Validations' do
     describe '#name' do
@@ -19,6 +20,10 @@ describe User, type: :model do
         subject.name = 'a' * 51
         expect(subject).to_not be_valid
       end
+
+      it 'is valid with proper data' do
+        expect(users(:one)).to be_valid
+      end
     end
 
     describe '#full_name' do
@@ -30,6 +35,10 @@ describe User, type: :model do
       it 'is invalid when longer than 100 characters' do
         subject.full_name = 'a' * 101
         expect(subject).to_not be_valid
+      end
+
+      it 'is valid with proper data' do
+        expect(users(:one)).to be_valid
       end
     end
   end

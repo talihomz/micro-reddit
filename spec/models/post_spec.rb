@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Post, type: :model do
-  subject { Post.new(content: "I'm a post :)") }
+  fixtures :posts
+  subject { posts(:one) }
 
   describe 'Validations' do
     describe '#content' do
@@ -14,12 +15,9 @@ describe Post, type: :model do
         subject.content = 'a' * 501
         expect(subject).to_not be_valid
       end
-    end
-    describe '#user' do
-      it 'is invalid when blank' do
-        puts 
-        subject.content = ' ' * 10
-        expect(subject).to_not be_valid
+
+      it 'is valid with proper data' do
+        expect(posts(:one)).to be_valid
       end
     end
   end

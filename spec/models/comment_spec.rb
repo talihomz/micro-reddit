@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Comment, type: :model do
-
+  fixtures :comments
   subject { Comment.new(content: "I'm a comment :)") }
   
   describe "Validations" do
@@ -15,6 +15,10 @@ describe Comment, type: :model do
       it 'is invalid when longer than 500 characters' do
         subject.content = 'a' * 501
         expect(subject).to_not be_valid
+      end
+
+      it 'is valid with proper data' do
+        expect(comments(:one)).to be_valid
       end
     end
 
